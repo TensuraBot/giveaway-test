@@ -1,20 +1,21 @@
 // pages/api/sessions2/[id].js
-const { getSessions, saveData, data } = require("../../../data");
+import redis from '../../../lib/upstash';
 
-export default function handler(req, res) {
+export default async function handler(req, res) {
   const { id } = req.query;
-  if (req.method === "DELETE") {
+  if (req.method === 'DELETE') {
     const { authorization } = req.headers;
     if (authorization !== "Bearer dev123") {
       return res.status(403).json({ error: "Unauthorized" });
     }
-    if (!data.sessions[id]) {
+    const exists = await redis.exists(`session:${id}`);
+    if (!exists) {
       return res.status(404).json({ error: "Session not found" });
     }
-    delete data.sessions[id];
-    saveData();
-    res.status(200).json({ message: "Session deleted" });
+    await redis.del(`session:${id}`);
+    await redis.srem('sessions_list', id);
+    return res.status(200).json({ message: "Session deleted" });
   } else {
-    res.status(405).json({ error: "Method not allowed" });
+    return res.status(405).json({ error: "Method not allowed" });
   }
 }
