@@ -88,19 +88,19 @@ export default function Admin() {
 
   if (!isDeveloper) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col items-center p-4">
-        <h1 className="text-3xl mb-4 text-sky-400">Developer Login</h1>
-        <form onSubmit={handleLogin} className="flex flex-col">
+      <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6">
+        <h1 className="text-3xl mb-6 text-blue-400">Developer Login</h1>
+        <form onSubmit={handleLogin} className="flex flex-col w-full max-w-sm">
           <input
             type="password"
             placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="p-2 mb-4 bg-gray-800 text-white rounded"
+            className="p-3 mb-4 bg-gray-800 border border-gray-700 rounded focus:ring-blue-500 focus:border-blue-500"
           />
           <button
             type="submit"
-            className="bg-sky-400 hover:bg-sky-500 transition-all duration-300 p-2 rounded"
+            className="p-3 bg-blue-500 hover:bg-blue-600 transition-all duration-300 rounded text-white font-semibold"
           >
             Login
           </button>
@@ -110,18 +110,18 @@ export default function Admin() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center p-4">
-      <h1 className="text-4xl mb-4 text-sky-400 animate-fadeIn">Developer Dashboard</h1>
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center p-6">
+      <h1 className="text-4xl mb-6 text-blue-400 font-bold animate-fadeIn">Developer Dashboard</h1>
 
-      <div className="mb-4">
-        <label htmlFor="session" className="mr-2">
+      <div className="mb-4 w-full max-w-md">
+        <label htmlFor="session" className="block mb-2 text-sm font-medium text-blue-400">
           Select Session:
         </label>
         <select
           id="session"
           value={selectedSession}
           onChange={(e) => setSelectedSession(e.target.value)}
-          className="bg-gray-800 text-white p-2 rounded"
+          className="w-full p-2 bg-gray-800 border border-gray-700 text-white rounded focus:ring-blue-500 focus:border-blue-500"
         >
           {sessions.map((session) => (
             <option key={session.id} value={session.id}>
@@ -131,33 +131,33 @@ export default function Admin() {
         </select>
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex space-x-2">
         <button
           onClick={copyNames}
-          className="bg-sky-400 hover:bg-sky-500 transition-all duration-300 p-2 rounded mr-2"
+          className="p-3 bg-blue-500 hover:bg-blue-600 transition-all duration-300 rounded text-white font-semibold"
         >
           Copy Names
         </button>
-        {copySuccess && <span className="ml-2 text-green-400">{copySuccess}</span>}
+        {copySuccess && <span className="self-center text-green-400">{copySuccess}</span>}
       </div>
 
-      <div className="mb-4">
+      <div className="mb-4 flex space-x-2">
         <button
           onClick={createSession}
-          className="bg-sky-400 hover:bg-sky-500 transition-all duration-300 p-2 rounded mr-2"
+          className="p-3 bg-blue-500 hover:bg-blue-600 transition-all duration-300 rounded text-white font-semibold"
         >
           Create Session
         </button>
         <button
           onClick={deleteSession}
-          className="bg-red-500 hover:bg-red-600 transition-all duration-300 p-2 rounded"
+          className="p-3 bg-red-500 hover:bg-red-600 transition-all duration-300 rounded text-white font-semibold"
         >
           Delete Session
         </button>
       </div>
 
       <div className="w-full max-w-md">
-        <h2 className="text-2xl mb-2 text-sky-400">Names in Session</h2>
+        <h2 className="text-2xl mb-2 text-blue-400">Names in Session</h2>
         <ul className="bg-gray-800 p-4 rounded space-y-2 max-h-64 overflow-y-auto">
           {names.map((name, index) => (
             <li key={index} className="p-2 border-b border-gray-700 animate-slideIn">
