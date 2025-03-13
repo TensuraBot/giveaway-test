@@ -2,10 +2,23 @@
 const fs = require("fs");
 const path = require("path");
 
-const dataFilePath = path.join(process.cwd(), "data.json");
+// Gunakan direktori /tmp agar writable
+const dataFilePath = path.join("/tmp", "data.json");
+
+function initializeData() {
+  if (!fs.existsSync(dataFilePath)) {
+    const initialData = {
+      sessions: {
+        default: { id: "default", names: [] }
+      }
+    };
+    fs.writeFileSync(dataFilePath, JSON.stringify(initialData, null, 2));
+  }
+}
 
 function readData() {
   try {
+    initializeData();
     const data = fs.readFileSync(dataFilePath, "utf8");
     return JSON.parse(data);
   } catch (err) {
