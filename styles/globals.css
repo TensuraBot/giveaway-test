@@ -28,3 +28,8 @@
 .animate-slideIn {
   animation: slideIn 0.5s ease-out;
 }
+
+/* Tambahan untuk responsivitas */
+button {
+  min-width: 100px;
+}
