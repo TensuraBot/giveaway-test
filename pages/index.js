@@ -8,7 +8,7 @@ export default function Home() {
   const [newName, setNewName] = useState("");
 
   useEffect(() => {
-    fetch("/api/sessions")
+    fetch("/api/sessions2")
       .then((res) => res.json())
       .then((data) => {
         setSessions(data);
