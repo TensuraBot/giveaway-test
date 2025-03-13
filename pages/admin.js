@@ -11,7 +11,7 @@ export default function Admin() {
 
   useEffect(() => {
     if (isDeveloper) {
-      fetch("/api/sessions")
+      fetch("/api/sessions2")
         .then((res) => res.json())
         .then((data) => {
           setSessions(data);
@@ -49,7 +49,7 @@ export default function Admin() {
   const createSession = async () => {
     const sessionId = prompt("Enter new session ID:");
     if (sessionId) {
-      const res = await fetch("/api/sessions", {
+      const res = await fetch("/api/sessions2", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ export default function Admin() {
   const deleteSession = async () => {
     if (!selectedSession) return;
     if (confirm(`Are you sure you want to delete session ${selectedSession}?`)) {
-      const res = await fetch(`/api/sessions/${selectedSession}`, {
+      const res = await fetch(`/api/sessions2/${selectedSession}`, {
         method: "DELETE",
         headers: { Authorization: "Bearer dev123" },
       });
